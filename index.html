@@ -315,6 +315,130 @@
     .notes li { font-size: 17px; line-height: 1.35; }
     .notes li strong { color: var(--blue-deep); }
     .notes .back { margin-top: 22px; font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 999px), (max-height: 559px) {
+      html, body {
+        height: auto;
+        background: var(--paper);
+      }
+
+      body {
+        display: block;
+        overflow: auto;
+      }
+
+      .viewport {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .sheet {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        transform: none !important;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        overflow: visible;
+      }
+
+      .sheet,
+      .hero,
+      .compare,
+      .panel,
+      .shot,
+      .copy,
+      .facts,
+      .agents,
+      .head,
+      .row,
+      .agent {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .shot img,
+      .agent img,
+      .nest {
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .hero,
+      .compare,
+      .agents {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .hero {
+        padding: 28px 22px 26px;
+      }
+
+      .hero h1 { font-size: 32px; }
+
+      .nest { height: 96px; }
+
+      .compare {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .panel { grid-template-rows: 210px auto auto auto; }
+
+      .shot,
+      .shot img { height: 210px; }
+
+      .panel h2 { font-size: 26px; }
+      .panel .def { font-size: 17px; line-height: 1.4; }
+      .facts p { font-size: 16px; }
+
+      .agents {
+        padding: 18px 16px 28px;
+        gap: 14px;
+      }
+
+      .agents .head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .agents h2 { font-size: 24px; }
+
+      .agents .head span {
+        font-size: 16px;
+        line-height: 1.35;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .agent {
+        grid-template-columns: 108px 1fr;
+        grid-template-rows: auto auto;
+        column-gap: 12px;
+        row-gap: 2px;
+        align-items: center;
+      }
+
+      .agent img {
+        grid-row: 1 / span 2;
+        width: 108px;
+        height: 76px;
+      }
+
+      .agent strong { font-size: 17px; }
+      .agent p { font-size: 15px; }
+    }
+
+    @media (max-width: 520px) {
+      .facts { grid-template-columns: 1fr; gap: 10px; }
+    }
   </style>
 </head>
 <body>
@@ -454,6 +578,11 @@
   <script>
     function fit() {
       const sheet = document.getElementById("sheet");
+      const poster = window.innerWidth >= 1000 && window.innerHeight >= 560;
+      if (!poster) {
+        sheet.style.transform = "none";
+        return;
+      }
       const scale = Math.min(window.innerWidth / 1366, window.innerHeight / 768);
       sheet.style.transform = "scale(" + scale + ")";
     }
