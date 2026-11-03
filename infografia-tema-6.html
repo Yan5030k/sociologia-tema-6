@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tema 6 · Individuo, grupos y sociedad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;0,9..144,650;1,9..144,560&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #2a3ef0;
+      --blue-deep: #1c2ec9;
+      --ink: #1c1916;
+      --muted: #5e584f;
+      --paper: #f4efe7;
+      --sand: #efe4d4;
+      --white: #fffcf8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: #cfc8bc;
+      color: var(--ink);
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .viewport {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+
+    .sheet {
+      width: 1366px;
+      height: 768px;
+      background: var(--paper);
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      grid-template-rows: minmax(0, 1fr) 214px;
+      transform-origin: center center;
+      overflow: hidden;
+    }
+
+    .hero {
+      background: var(--blue);
+      color: white;
+      padding: 26px 30px 20px;
+      display: flex;
+      flex-direction: column;
+      grid-row: 1;
+      grid-column: 1;
+      min-height: 0;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.78;
+    }
+
+    .hero h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 560;
+      font-size: 34px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      margin-top: 10px;
+    }
+
+    .nest {
+      margin-top: 16px;
+      width: 100%;
+      height: 104px;
+    }
+
+    .hero .pull {
+      margin-top: 14px;
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 560;
+      font-style: italic;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .hero .lead {
+      margin-top: 6px;
+      font-size: 15.5px;
+      line-height: 1.32;
+      max-width: 34ch;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .process {
+      margin-top: auto;
+      padding-top: 18px;
+    }
+
+    .process span {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .process strong {
+      display: block;
+      margin: 2px 0 3px;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 24px;
+      font-weight: 560;
+      letter-spacing: -0.03em;
+    }
+
+    .process p {
+      font-size: 15.5px;
+      line-height: 1.35;
+      max-width: 36ch;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .compare {
+      grid-column: 2;
+      grid-row: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      padding: 14px;
+      min-height: 0;
+    }
+
+    .panel {
+      display: grid;
+      grid-template-rows: minmax(132px, 1fr) auto auto auto;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .shot {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .panel .copy { padding: 18px 28px 0; }
+
+    .panel.primary { background: var(--blue-deep); color: white; }
+    .panel.secondary {
+      background: var(--white);
+      color: var(--ink);
+      border: 1px solid #e6dfd3;
+    }
+
+    .panel .tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .panel.primary .tag { color: rgba(255, 255, 255, 0.62); }
+    .panel.secondary .tag { color: var(--blue); }
+
+    .panel h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 560;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      margin-top: 2px;
+    }
+
+    .panel .def {
+      align-self: start;
+      font-size: 15.5px;
+      line-height: 1.3;
+      max-width: none;
+      padding: 8px 28px 4px;
+    }
+
+    .panel.primary .def { color: rgba(255, 255, 255, 0.94); }
+
+    .facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.15fr;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 14px 28px 16px;
+    }
+
+    .panel.primary .facts { background: rgba(255, 255, 255, 0.1); }
+    .panel.secondary .facts { background: var(--sand); }
+
+    .facts h3 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .panel.primary .facts h3 { color: rgba(255, 255, 255, 0.65); }
+    .panel.secondary .facts h3 { color: var(--blue-deep); }
+
+    .facts p {
+      font-size: 15.5px;
+      line-height: 1.25;
+      font-weight: 600;
+    }
+
+    .agents {
+      grid-column: 1 / -1;
+      background: var(--white);
+      border-top: 1px solid #e6dfd3;
+      padding: 14px 26px 14px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .agents .head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .agents h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 560;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .agents .head span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 18px;
+      min-height: 0;
+    }
+
+    .agent {
+      display: grid;
+      grid-template-rows: 78px auto auto;
+      gap: 3px;
+      min-height: 0;
+    }
+
+    .agent img {
+      width: 100%;
+      height: 78px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .agent strong {
+      display: block;
+      font-size: 14.5px;
+      letter-spacing: -0.01em;
+    }
+
+    .agent p {
+      font-size: 12.5px;
+      line-height: 1.25;
+      color: var(--muted);
+    }
+
+    .notes { display: none; }
+
+    body.notes-on .sheet { display: none; }
+    body.notes-on .notes {
+      display: block;
+      width: min(760px, 92vw);
+      background: var(--white);
+      padding: 36px 40px 32px;
+      border-top: 8px solid var(--blue);
+    }
+
+    .notes h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 560;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+      color: var(--blue-deep);
+      margin-bottom: 6px;
+    }
+
+    .notes .sub { color: var(--muted); margin-bottom: 18px; font-size: 15px; }
+    .notes ol { padding-left: 22px; display: grid; gap: 12px; }
+    .notes li { font-size: 17px; line-height: 1.35; }
+    .notes li strong { color: var(--blue-deep); }
+    .notes .back { margin-top: 22px; font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="viewport">
+    <article class="sheet" id="sheet">
+      <section class="hero">
+        <p class="eyebrow">Sociología · Tema 6</p>
+        <h1>La relación entre el individuo, los grupos y la sociedad</h1>
+        <svg class="nest" viewBox="0 0 340 132" aria-hidden="true">
+          <rect x="1.5" y="1.5" width="337" height="129" rx="18" fill="none" stroke="white" stroke-opacity="0.35" stroke-width="1.5"/>
+          <text x="16" y="24" fill="white" fill-opacity="0.8" font-family="Source Sans 3, Segoe UI, sans-serif" font-size="12" font-weight="700" letter-spacing="1.6">SOCIEDAD</text>
+          <rect x="28" y="34" width="284" height="86" rx="14" fill="none" stroke="white" stroke-opacity="0.75" stroke-width="1.5"/>
+          <text x="42" y="54" fill="white" font-family="Source Sans 3, Segoe UI, sans-serif" font-size="12" font-weight="700" letter-spacing="1.6">GRUPOS SOCIALES</text>
+          <rect x="78" y="66" width="184" height="40" rx="11" fill="white"/>
+          <text x="170" y="91" text-anchor="middle" fill="#1c2ec9" font-family="Source Sans 3, Segoe UI, sans-serif" font-size="14" font-weight="700" letter-spacing="1.4">INDIVIDUO</text>
+        </svg>
+        <p class="pull">Nadie se forma solo.</p>
+        <p class="lead">Hay interdependencia: la identidad se construye al relacionarse con otras personas y al participar en grupos.</p>
+        <div class="process">
+          <span>El proceso</span>
+          <strong>Socialización</strong>
+          <p>Así se aprenden normas, valores, costumbres, conocimientos y formas de comportamiento.</p>
+        </div>
+      </section>
+
+      <section class="compare">
+        <article class="panel primary">
+          <div class="shot">
+            <img src="img/familia2.jpg" alt="Padres conversando con sus hijas en casa" style="object-position: 50% 40%;" />
+          </div>
+          <div class="copy">
+            <p class="tag">Inicio</p>
+            <h2>Socialización primaria</h2>
+          </div>
+          <p class="def">Es el primer proceso. La persona aprende lo fundamental de la cultura y sus primeras formas de trato con los demás.</p>
+          <div class="facts">
+            <div>
+              <h3>Cuándo</h3>
+              <p>En la infancia</p>
+            </div>
+            <div>
+              <h3>Con quién</h3>
+              <p>Familia y cuidadores</p>
+            </div>
+            <div>
+              <h3>Ejemplos</h3>
+              <p>Hablar, convivir, hábitos y valores</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel secondary">
+          <div class="shot">
+            <img src="img/escuela.jpg" alt="Estudiantes en un salón de clase" style="object-position: 72% 45%;" />
+          </div>
+          <div class="copy">
+            <p class="tag">Continúa</p>
+            <h2>Socialización secundaria</h2>
+          </div>
+          <p class="def">Después se suman conocimientos, normas, valores y comportamientos nuevos, según los espacios en los que participa.</p>
+          <div class="facts">
+            <div>
+              <h3>Cuándo</h3>
+              <p>A lo largo de la vida</p>
+            </div>
+            <div>
+              <h3>Dónde</h3>
+              <p>Instituciones y otros espacios</p>
+            </div>
+            <div>
+              <h3>Ejemplos</h3>
+              <p>Escuela, trabajo y comunidades virtuales</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="agents">
+        <div class="head">
+          <h2>Agentes de socialización</h2>
+          <span>Cambian los grupos, cambia la persona. Cambian las personas, cambia la sociedad.</span>
+        </div>
+        <div class="row">
+          <article class="agent">
+            <img src="img/familia.jpg" alt="Familia compartiendo en la sala" style="object-position: 50% 30%;" />
+            <strong>Familia</strong>
+            <p>Valores, normas y hábitos.</p>
+          </article>
+          <article class="agent">
+            <img src="img/escuela.jpg" alt="Jóvenes estudiando juntos" style="object-position: 30% 40%;" />
+            <strong>Escuela</strong>
+            <p>Conocimiento y convivencia.</p>
+          </article>
+          <article class="agent">
+            <img src="img/amigos.jpg" alt="Grupo de amigas riendo en un parque" style="object-position: 50% 28%;" />
+            <strong>Amigos</strong>
+            <p>Gustos, identidad y actitudes.</p>
+          </article>
+          <article class="agent">
+            <img src="img/medios.jpg" alt="Periodista con micrófono durante una entrevista" style="object-position: 30% 30%;" />
+            <strong>Medios</strong>
+            <p>Información y modelos culturales.</p>
+          </article>
+          <article class="agent">
+            <img src="img/redes.jpg" alt="Compañeras mirando un teléfono juntas" style="object-position: 50% 55%;" />
+            <strong>Redes sociales</strong>
+            <p>Opiniones y vida digital.</p>
+          </article>
+          <article class="agent">
+            <img src="img/religion.jpg" alt="Comunidad reunida en un servicio religioso" style="object-position: 42% 40%;" />
+            <strong>Religión</strong>
+            <p>Creencias y conducta.</p>
+          </article>
+          <article class="agent">
+            <img src="img/trabajo.jpg" alt="Equipo de trabajo en una reunión" style="object-position: 50% 35%;" />
+            <strong>Trabajo</strong>
+            <p>Normas y responsabilidades.</p>
+          </article>
+        </div>
+      </section>
+    </article>
+
+    <section class="notes" id="notes">
+      <h2>Guion para exponer · Tema 6</h2>
+      <p class="sub">Un minuto y medio. Señala la infografía mientras hablas. Pulsa N para volver.</p>
+      <ol>
+        <li><strong>Abran con el dibujo.</strong> El individuo está dentro de los grupos, y los grupos dentro de la sociedad. No van separados: hay interdependencia. Nadie se forma solo.</li>
+        <li><strong>Nombren el proceso.</strong> En esa relación se aprenden normas, valores, costumbres, conocimientos y formas de comportamiento. Eso es la socialización.</li>
+        <li><strong>Contrasten los dos bloques.</strong> Señalen la foto de la familia: la primaria es el inicio, en la infancia, con quienes cuidan. Luego la foto del salón: la secundaria sigue en la escuela, el trabajo y las comunidades virtuales.</li>
+        <li><strong>Recorran las fotos de abajo.</strong> Familia, escuela, amigos, medios, redes, religión y trabajo. Cada imagen es un agente distinto y no enseña lo mismo.</li>
+        <li><strong>Cierren con la frase de la franja.</strong> Cambian los grupos, cambia la persona. Cambian las personas, cambia la sociedad.</li>
+      </ol>
+      <p class="back">N o Escape · volver a la infografía</p>
+    </section>
+  </div>
+
+  <script>
+    function fit() {
+      const sheet = document.getElementById("sheet");
+      const scale = Math.min(window.innerWidth / 1366, window.innerHeight / 768);
+      sheet.style.transform = "scale(" + scale + ")";
+    }
+    fit();
+    window.addEventListener("resize", fit);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "n" || e.key === "N") document.body.classList.toggle("notes-on");
+      if (e.key === "Escape") document.body.classList.remove("notes-on");
+      if (e.key === "f" || e.key === "F") {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      }
+    });
+  </script>
+</body>
+</html>
